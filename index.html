@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zoomino — استودیو طراحی پوستر فارسی و خرید ارزان</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=block" rel="stylesheet" />
+  <style>
+    body { font-family: 'Vazirmatn', sans-serif; background: #F4F7FB; color: #111517; }
+    .font-mono { font-family: 'IBM Plex Mono', monospace; }
+    .material-symbols-outlined { display: inline-block; width: 1em; height: 1em; line-height: 1 !important; vertical-align: middle; }
+    .liquid-glass {
+      background: linear-gradient(135deg, rgba(255,255,255,0.78) 0%, rgba(255,255,255,0.46) 55%, rgba(241,246,255,0.64) 100%);
+      backdrop-filter: blur(24px) saturate(185%);
+      -webkit-backdrop-filter: blur(24px) saturate(185%);
+      border: 1px solid rgba(255,255,255,0.78);
+      box-shadow: inset 0 1.5px 1px rgba(255,255,255,0.92), 0 12px 32px -12px rgba(17,21,23,0.14);
+    }
+    .liquid-glass-card {
+      background: linear-gradient(145deg, rgba(255,255,255,0.82) 0%, rgba(255,255,255,0.52) 50%, rgba(236,243,255,0.68) 100%);
+      backdrop-filter: blur(28px) saturate(190%);
+      -webkit-backdrop-filter: blur(28px) saturate(190%);
+      border: 1px solid rgba(255,255,255,0.82);
+      box-shadow: inset 0 2px 2px rgba(255,255,255,0.95), 0 18px 42px -14px rgba(17,21,23,0.15);
+    }
+    .liquid-glass-chip {
+      background: linear-gradient(135deg, rgba(255,255,255,0.72) 0%, rgba(255,255,255,0.42) 100%);
+      backdrop-filter: blur(18px) saturate(170%);
+      -webkit-backdrop-filter: blur(18px) saturate(170%);
+      border: 1px solid rgba(255,255,255,0.76);
+    }
+    .liquid-glass-dark {
+      background: linear-gradient(135deg, rgba(24,29,33,0.92) 0%, rgba(17,21,23,0.84) 60%, rgba(21,45,78,0.9) 100%);
+      backdrop-filter: blur(22px) saturate(180%);
+      -webkit-backdrop-filter: blur(22px) saturate(180%);
+      border: 1px solid rgba(255,255,255,0.24);
+      box-shadow: inset 0 1.5px 1px rgba(255,255,255,0.28), 0 14px 30px -10px rgba(17,21,23,0.38);
+    }
+    @keyframes floatCardA { 0%, 100% { transform: translateY(0px) rotate(-9deg); } 50% { transform: translateY(-16px) rotate(-5deg); } }
+    @keyframes floatCardB { 0%, 100% { transform: translateY(0px) rotate(8deg); } 50% { transform: translateY(14px) rotate(4deg); } }
+    @keyframes floatCardC { 0%, 100% { transform: translateY(0px) rotate(-6deg); } 50% { transform: translateY(-12px) rotate(-2deg); } }
+    @keyframes floatCardD { 0%, 100% { transform: translateY(0px) rotate(10deg); } 50% { transform: translateY(16px) rotate(6deg); } }
+    .animate-float-a { animation: floatCardA 6.8s ease-in-out infinite; }
+    .animate-float-b { animation: floatCardB 7.8s ease-in-out infinite; }
+    .animate-float-c { animation: floatCardC 8.4s ease-in-out infinite; }
+    .animate-float-d { animation: floatCardD 7.2s ease-in-out infinite; }
+    .floating-poster { transition: transform 360ms cubic-bezier(0.2, 0, 0, 1); }
+    .floating-poster:hover { animation-play-state: paused; transform: scale(1.08) rotate(0deg) !important; z-index: 25; }
+    .poster-card { transition: transform 320ms cubic-bezier(0.2, 0, 0, 1); }
+    .poster-card:hover { transform: translateY(-8px); }
+    .poster-card img { transition: transform 480ms cubic-bezier(0.2, 0, 0, 1); }
+    .poster-card:hover img { transform: scale(1.06); }
+  </style>
+</head>
+<body class="relative min-h-screen flex flex-col overflow-x-clip">
+  <div aria-hidden="true" class="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+    <div class="absolute -top-40 right-[-10%] w-[520px] h-[520px] rounded-full bg-[#D8E7FF]/70 blur-[110px]"></div>
+    <div class="absolute top-[28%] left-[-12%] w-[480px] h-[480px] rounded-full bg-[#E3ECF9]/80 blur-[120px]"></div>
+    <div class="absolute bottom-[-12%] right-[22%] w-[540px] h-[540px] rounded-full bg-[#DCE9FA]/65 blur-[130px]"></div>
+  </div>
+
+  <div class="sticky md:fixed top-3 md:top-4 inset-x-0 z-30 px-3 md:px-6">
+    <header class="max-w-6xl mx-auto rounded-full liquid-glass px-5 py-3 flex items-center justify-between gap-4">
+      <a href="#hero" class="flex items-center gap-2 text-[#111517]">
+        <span class="material-symbols-outlined text-2xl text-[#1558B0]" aria-hidden="true">science</span>
+        <span class="text-xl font-bold tracking-tight" dir="ltr">Zoomino</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-8 text-sm font-semibold">
+        <a href="#gallery" class="text-[#111517] hover:text-[#1558B0]">پوستر فارسی</a>
+        <a href="#pricing" class="text-[#4A545C] hover:text-[#111517]">خرید ارزان</a>
+        <a href="#process" class="text-[#4A545C] hover:text-[#111517]">فرآیند کار</a>
+        <a href="#faq" class="text-[#4A545C] hover:text-[#111517]">سوالات متداول</a>
+      </nav>
+      <a href="tel:+989365051900" onclick="copyPhoneNumber()" class="inline-flex items-center gap-2 rounded-full liquid-glass-dark text-white px-4 h-10 text-xs font-mono" dir="ltr">
+        <span class="material-symbols-outlined text-base" aria-hidden="true">call</span>
+        <span>0936 505 1900</span>
+      </a>
+    </header>
+  </div>
+
+  <section id="hero" class="relative min-h-screen w-full overflow-hidden flex flex-col items-center justify-center px-6 pt-24 pb-20">
+    
+      <a href="#gallery" aria-label="پوستر تایپوگرافی فارسی" class="floating-poster hidden lg:block absolute rounded-[32px] p-1.5 liquid-glass-card z-10 animate-float-a top-24 right-10 w-44 opacity-95">
+        <div class="overflow-hidden rounded-[26px]">
+          <img src="https://ais-dev-appcwncqxhpcxhdisyjxkv-973169031433.europe-west2.run.app/src/assets/images/persian_typography_poster_1795609505622.jpg" alt="پوستر نمایشگاه خوشنویسی و تایپوگرافی فارسی" referrerPolicy="no-referrer" class="w-full h-72 object-cover" />
+        </div>
+      </a>
+
+      <a href="#gallery" aria-label="پوستر فستیوال فیلم" class="floating-poster hidden lg:block absolute rounded-[32px] p-1.5 liquid-glass-card z-10 animate-float-b top-20 left-1/2 -translate-x-1/2 w-40 opacity-85">
+        <div class="overflow-hidden rounded-[26px]">
+          <img src="https://lh3.googleusercontent.com/aida/ALJJyrCT_Id-aQ2MmffSVQyXXJYI48jIoTt_yCTtDttndktGBgNloj2gliWKu4TomzyG1rvNbj6rUjbwYe0Rpyl5yi83zPzb3KFxX-I5lGOjCzcieYa71-vEjJaSnHEGcRFela1ern-fY_B57zkBgT5Hq6ajb2ZpXhfJGYkFNn-Rb0qfuJ6H2l8vv4nfnEgu70Pv7H8rL1VOZ1f0F4-5hhT9BmpwGZxlpYmkZcVEkz-i6Z0sTtuuWrzKHZCwv44Img" alt="پوستر فستیوال فیلم" referrerPolicy="no-referrer" class="w-full h-56 object-cover" />
+        </div>
+      </a>
+
+      <a href="#gallery" aria-label="پوستر کنسرت فارسی" class="floating-poster hidden lg:block absolute rounded-[32px] p-1.5 liquid-glass-card z-10 animate-float-c top-24 left-10 w-44 opacity-95">
+        <div class="overflow-hidden rounded-[26px]">
+          <img src="https://ais-dev-appcwncqxhpcxhdisyjxkv-973169031433.europe-west2.run.app/src/assets/images/persian_music_poster_1795609506424.jpg" alt="پوستر موسیقی و رویداد فارسی" referrerPolicy="no-referrer" class="w-full h-72 object-cover" />
+        </div>
+      </a>
+
+      <a href="#gallery" aria-label="پوستر کنسرت و فستیوال" class="floating-poster hidden lg:block absolute rounded-[32px] p-1.5 liquid-glass-card z-10 animate-float-d bottom-16 right-12 w-44 opacity-95">
+        <div class="overflow-hidden rounded-[26px]">
+          <img src="https://lh3.googleusercontent.com/aida/ALJJyrBQvZ7zxy2Rw77-TdWbxl4XgFdUrMwPJzdj00IK9XeGRLEBR0IO5KE0dd-QSVjAeWRQmULhO6wI89aKXiPUW6UhAMFs5EMA-wAwt84aBTXOg2WlbHp2mNQEJ9WAdK9VaHpz68olCHzJnNk8fUg9elXvP33-lar-CiFMelOrJkp6f2TRcyTL_MIFlZwsjOBqNBQywCastoRElqfW5DSk3KIghDGD4yKkk9W3Echxi9A7xAy9y-sYXFnwJGw" alt="پوستر کنسرت و فستیوال" referrerPolicy="no-referrer" class="w-full h-72 object-cover" />
+        </div>
+      </a>
+
+      <a href="#gallery" aria-label="پوستر معماری مدرن" class="floating-poster hidden lg:block absolute rounded-[32px] p-1.5 liquid-glass-card z-10 animate-float-a bottom-8 left-1/2 -translate-x-1/2 w-40 opacity-85">
+        <div class="overflow-hidden rounded-[26px]">
+          <img src="https://lh3.googleusercontent.com/aida/ALJJyrDAjq4foE9Blw9wXFLGZPjNthnWD9Zp-tXV5ncOmgDJv2wGIqin7XTAvmoLfhR1vKz7ExCFRyxUxz3qlLSKCFVBxy_vEnMnwQzGiaivbknv3Sn3Xdx3HuH9Cp97X-dlPQoL00A7DqVXG9pl2V1VrtTh5HKqgeM_1AYo4qsnmPm9J5Pdz3PwNRisj9XQ-kFnQF3stqL9txynl2TznihLX0KM8rK_2nU9__4fgDXPyaW4vUUN_QeGru1J_I7L2g" alt="پوستر معماری مدرن" referrerPolicy="no-referrer" class="w-full h-56 object-cover" />
+        </div>
+      </a>
+
+      <a href="#gallery" aria-label="پوستر سینمای ایران" class="floating-poster hidden lg:block absolute rounded-[32px] p-1.5 liquid-glass-card z-10 animate-float-b bottom-16 left-12 w-44 opacity-95">
+        <div class="overflow-hidden rounded-[26px]">
+          <img src="https://ais-dev-appcwncqxhpcxhdisyjxkv-973169031433.europe-west2.run.app/src/assets/images/persian_cinema_poster_1795609505983.jpg" alt="پوستر نمایشگاه سینمای معاصر ایران" referrerPolicy="no-referrer" class="w-full h-72 object-cover" />
+        </div>
+      </a>
+    <div class="relative z-20 max-w-2xl mx-auto text-center flex flex-col items-center gap-6">
+      <h1 id="hero-title" class="text-4xl md:text-6xl font-bold text-[#111517]">استودیو طراحی پوستر و تایپوگرافی فارسی</h1>
+      <p id="hero-subtitle" class="text-base md:text-lg text-[#4A545C] max-w-xl">ایده‌های رویداد، برند یا نمایشگاه خود را با تعرفه اقتصادی و استاندارد چاپ به پوسترهای فارسی و مدرن تبدیل کنید.</p>
+      <a href="tel:+989365051900" onclick="copyPhoneNumber()" class="inline-flex items-center gap-3 rounded-full liquid-glass-dark text-white px-8 py-4 font-semibold hover:scale-105 transition-transform">
+        <span class="material-symbols-outlined text-xl" aria-hidden="true">call</span>
+        <span>تماس برای سفارش: ۰۹۳۶۵۰۵۱۹۰۰</span>
+      </a>
+    </div>
+    <div class="relative z-20 mt-14 flex items-center gap-4">
+      <button type="button" onclick="prevSlide()" aria-label="اسلاید قبلی" class="inline-flex items-center justify-center w-10 h-10 rounded-full liquid-glass-chip">
+        <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+      </button>
+      <div class="flex items-center gap-2 px-3.5 py-2.5 rounded-full liquid-glass">
+        <button type="button" onclick="goToSlide(0)" class="slide-dot h-2 w-8 bg-[#111517] rounded-full transition-all"></button><button type="button" onclick="goToSlide(1)" class="slide-dot h-2 w-2 bg-[#5F6368]/60 rounded-full transition-all"></button><button type="button" onclick="goToSlide(2)" class="slide-dot h-2 w-2 bg-[#5F6368]/60 rounded-full transition-all"></button><button type="button" onclick="goToSlide(3)" class="slide-dot h-2 w-2 bg-[#5F6368]/60 rounded-full transition-all"></button>
+      </div>
+      <button type="button" onclick="nextSlide()" aria-label="اسلاید بعدی" class="inline-flex items-center justify-center w-10 h-10 rounded-full liquid-glass-chip">
+        <span class="material-symbols-outlined" aria-hidden="true">chevron_left</span>
+      </button>
+    </div>
+  </section>
+
+  <main id="gallery" class="w-full max-w-6xl mx-auto px-6 py-20 flex flex-col gap-10">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+      <div class="flex flex-col gap-2">
+        <h2 class="text-3xl md:text-4xl font-bold text-[#111517]">گالری سبک‌های پوستر</h2>
+        <p class="text-[15px] text-[#4A545C] max-w-lg">پوسترهای فارسی و مدرن را ببینید، سبک دلخواه را انتخاب کنید و مستقیماً تماس بگیرید.</p>
+      </div>
+      <div class="flex flex-wrap items-center gap-2.5">
+        
+      <button type="button" aria-pressed="true" onclick="filterGallery('همه سبک‌ها', this)" class="filter-chip shrink-0 inline-flex items-center rounded-full px-4 py-2 transition-transform hover:scale-105 liquid-glass-dark text-white">
+        <span class="text-sm font-semibold">همه سبک‌ها</span>
+      </button>
+
+      <button type="button" aria-pressed="false" onclick="filterGallery('پوستر فارسی', this)" class="filter-chip shrink-0 inline-flex items-center rounded-full px-4 py-2 transition-transform hover:scale-105 liquid-glass-chip text-[#4A545C] hover:text-[#111517]">
+        <span class="text-sm font-semibold">پوستر فارسی</span>
+      </button>
+
+      <button type="button" aria-pressed="false" onclick="filterGallery('رویداد و فستیوال', this)" class="filter-chip shrink-0 inline-flex items-center rounded-full px-4 py-2 transition-transform hover:scale-105 liquid-glass-chip text-[#4A545C] hover:text-[#111517]">
+        <span class="text-sm font-semibold">رویداد و فستیوال</span>
+      </button>
+
+      <button type="button" aria-pressed="false" onclick="filterGallery('هنری و مینیمال', this)" class="filter-chip shrink-0 inline-flex items-center rounded-full px-4 py-2 transition-transform hover:scale-105 liquid-glass-chip text-[#4A545C] hover:text-[#111517]">
+        <span class="text-sm font-semibold">هنری و مینیمال</span>
+      </button>
+
+      <button type="button" aria-pressed="false" onclick="filterGallery('تبلیغاتی و برند', this)" class="filter-chip shrink-0 inline-flex items-center rounded-full px-4 py-2 transition-transform hover:scale-105 liquid-glass-chip text-[#4A545C] hover:text-[#111517]">
+        <span class="text-sm font-semibold">تبلیغاتی و برند</span>
+      </button>
+
+      <button type="button" aria-pressed="false" onclick="filterGallery('سینمایی', this)" class="filter-chip shrink-0 inline-flex items-center rounded-full px-4 py-2 transition-transform hover:scale-105 liquid-glass-chip text-[#4A545C] hover:text-[#111517]">
+        <span class="text-sm font-semibold">سینمایی</span>
+      </button>
+      </div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 items-stretch">
+      
+      <article data-category="پوستر فارسی" style="animation-delay: 0ms;" class="poster-card card-stagger h-full rounded-[34px] liquid-glass-card p-2.5 flex flex-col justify-between">
+        <div>
+          <div class="overflow-hidden rounded-[24px]">
+            <img src="https://ais-dev-appcwncqxhpcxhdisyjxkv-973169031433.europe-west2.run.app/src/assets/images/persian_typography_poster_1795609505622.jpg" alt="پوستر نمایشگاه خوشنویسی معاصر فارسی" referrerPolicy="no-referrer" class="w-full h-80 sm:h-96 object-cover rounded-[24px]" />
+          </div>
+          <div class="px-3 pt-4 pb-2 flex flex-col gap-2">
+            <header class="flex items-center justify-between gap-2">
+              <h3 class="text-xl font-semibold text-[#111517]">پوستر تایپوگرافی و خوشنویسی فارسی</h3>
+              <span class="font-mono text-xs text-[#1558B0]" dir="ltr">50×70 cm</span>
+            </header>
+            <p class="text-[15px] leading-6 text-[#4A545C]">خوشنویسی مدرن و ترکیب خط فارسی معاصر، مناسب گالری‌ها، نمایشگاه کتاب و رویدادهای فرهنگی.</p>
+          </div>
+        </div>
+        <footer class="px-3 pb-3 pt-3 flex items-center justify-between gap-3">
+          <span class="text-base font-semibold text-[#111517] tabular-nums">۳۹۰,۰۰۰ تومان</span>
+          <a href="tel:+989365051900" onclick="copyPhoneNumber('پوستر تایپوگرافی و خوشنویسی فارسی')" class="inline-flex items-center gap-1.5 rounded-full liquid-glass-dark text-white px-4 py-2 transition-transform hover:scale-105">
+            <span class="material-symbols-outlined text-sm" aria-hidden="true">call</span>
+            <span class="text-sm font-semibold">تماس برای سفارش</span>
+          </a>
+        </footer>
+      </article>
+
+      <article data-category="پوستر فارسی" style="animation-delay: 70ms;" class="poster-card card-stagger h-full rounded-[34px] liquid-glass-card p-2.5 flex flex-col justify-between">
+        <div>
+          <div class="overflow-hidden rounded-[24px]">
+            <img src="https://ais-dev-appcwncqxhpcxhdisyjxkv-973169031433.europe-west2.run.app/src/assets/images/persian_cinema_poster_1795609505983.jpg" alt="پوستر سینمای معاصر و تئاتر فارسی" referrerPolicy="no-referrer" class="w-full h-80 sm:h-96 object-cover rounded-[24px]" />
+          </div>
+          <div class="px-3 pt-4 pb-2 flex flex-col gap-2">
+            <header class="flex items-center justify-between gap-2">
+              <h3 class="text-xl font-semibold text-[#111517]">پوستر سینمای معاصر ایران</h3>
+              <span class="font-mono text-xs text-[#1558B0]" dir="ltr">70×100 cm</span>
+            </header>
+            <p class="text-[15px] leading-6 text-[#4A545C]">روایت‌گری تصویری با فونت‌های اصیل فارسی و چیدمان کردیت‌بلاک استاندارد جشنواره‌های داخلی.</p>
+          </div>
+        </div>
+        <footer class="px-3 pb-3 pt-3 flex items-center justify-between gap-3">
+          <span class="text-base font-semibold text-[#111517] tabular-nums">۵۵۰,۰۰۰ تومان</span>
+          <a href="tel:+989365051900" onclick="copyPhoneNumber('پوستر سینمای معاصر ایران')" class="inline-flex items-center gap-1.5 rounded-full liquid-glass-dark text-white px-4 py-2 transition-transform hover:scale-105">
+            <span class="material-symbols-outlined text-sm" aria-hidden="true">call</span>
+            <span class="text-sm font-semibold">تماس برای سفارش</span>
+          </a>
+        </footer>
+      </article>
+
+      <article data-category="پوستر فارسی" style="animation-delay: 140ms;" class="poster-card card-stagger h-full rounded-[34px] liquid-glass-card p-2.5 flex flex-col justify-between">
+        <div>
+          <div class="overflow-hidden rounded-[24px]">
+            <img src="https://ais-dev-appcwncqxhpcxhdisyjxkv-973169031433.europe-west2.run.app/src/assets/images/persian_music_poster_1795609506424.jpg" alt="پوستر کنسرت و موسیقی فارسی" referrerPolicy="no-referrer" class="w-full h-80 sm:h-96 object-cover rounded-[24px]" />
+          </div>
+          <div class="px-3 pt-4 pb-2 flex flex-col gap-2">
+            <header class="flex items-center justify-between gap-2">
+              <h3 class="text-xl font-semibold text-[#111517]">پوستر کنسرت و شب شعر فارسی</h3>
+              <span class="font-mono text-xs text-[#1558B0]" dir="ltr">A2</span>
+            </header>
+            <p class="text-[15px] leading-6 text-[#4A545C]">تلفیق ریتم رنگ‌های ریسوگراف و تیترهای جسورانه فارسی برای اجراهای زنده و نشست‌های ادبی.</p>
+          </div>
+        </div>
+        <footer class="px-3 pb-3 pt-3 flex items-center justify-between gap-3">
+          <span class="text-base font-semibold text-[#111517] tabular-nums">۴۵۰,۰۰۰ تومان</span>
+          <a href="tel:+989365051900" onclick="copyPhoneNumber('پوستر کنسرت و شب شعر فارسی')" class="inline-flex items-center gap-1.5 rounded-full liquid-glass-dark text-white px-4 py-2 transition-transform hover:scale-105">
+            <span class="material-symbols-outlined text-sm" aria-hidden="true">call</span>
+            <span class="text-sm font-semibold">تماس برای سفارش</span>
+          </a>
+        </footer>
+      </article>
+
+      <article data-category="رویداد و فستیوال" style="animation-delay: 210ms;" class="poster-card card-stagger h-full rounded-[34px] liquid-glass-card p-2.5 flex flex-col justify-between">
+        <div>
+          <div class="overflow-hidden rounded-[24px]">
+            <img src="https://lh3.googleusercontent.com/aida/ALJJyrBQvZ7zxy2Rw77-TdWbxl4XgFdUrMwPJzdj00IK9XeGRLEBR0IO5KE0dd-QSVjAeWRQmULhO6wI89aKXiPUW6UhAMFs5EMA-wAwt84aBTXOg2WlbHp2mNQEJ9WAdK9VaHpz68olCHzJnNk8fUg9elXvP33-lar-CiFMelOrJkp6f2TRcyTL_MIFlZwsjOBqNBQywCastoRElqfW5DSk3KIghDGD4yKkk9W3Echxi9A7xAy9y-sYXFnwJGw" alt="پوستر فستیوال موسیقی الکترونیک" referrerPolicy="no-referrer" class="w-full h-80 sm:h-96 object-cover rounded-[24px]" />
+          </div>
+          <div class="px-3 pt-4 pb-2 flex flex-col gap-2">
+            <header class="flex items-center justify-between gap-2">
+              <h3 class="text-xl font-semibold text-[#111517]">پوستر فستیوال و کنسرت</h3>
+              <span class="font-mono text-xs text-[#1558B0]" dir="ltr">50×70 cm</span>
+            </header>
+            <p class="text-[15px] leading-6 text-[#4A545C]">تایپوگرافی جسورانه و رنگ‌های پرانرژی مناسب اجراهای زنده و رویدادهای شهری.</p>
+          </div>
+        </div>
+        <footer class="px-3 pb-3 pt-3 flex items-center justify-between gap-3">
+          <span class="text-base font-semibold text-[#111517] tabular-nums">۵۹۰,۰۰۰ تومان</span>
+          <a href="tel:+989365051900" onclick="copyPhoneNumber('پوستر فستیوال و کنسرت')" class="inline-flex items-center gap-1.5 rounded-full liquid-glass-dark text-white px-4 py-2 transition-transform hover:scale-105">
+            <span class="material-symbols-outlined text-sm" aria-hidden="true">call</span>
+            <span class="text-sm font-semibold">تماس برای سفارش</span>
+          </a>
+        </footer>
+      </article>
+
+      <article data-category="هنری و مینیمال" style="animation-delay: 280ms;" class="poster-card card-stagger h-full rounded-[34px] liquid-glass-card p-2.5 flex flex-col justify-between">
+        <div>
+          <div class="overflow-hidden rounded-[24px]">
+            <img src="https://lh3.googleusercontent.com/aida/ALJJyrDCt-wyUD4oEMdaW5KNcAdK1UN8uXad491C0gLlQD0kCwXksGd67oALXpB9CykYGVjPEG4G0rtOpxAUCvzkEe5iuREX03oQ_DEcVnCSYWz69Kb5dhxNF_aJ_rc6fUswvOk_OYPpfBeFmPGDkCu6aeiywtN9mMnQ9aNYPrabgOjjhj8053zHHw6A3xxaS_zQcf6XXraOZ48u51H2xraMtnxK43H1JhyYPvx6GjO-VGYe3e9SrwM7TcXAhRMyNA" alt="پوستر مینیمال گالری و نمایشگاه" referrerPolicy="no-referrer" class="w-full h-80 sm:h-96 object-cover rounded-[24px]" />
+          </div>
+          <div class="px-3 pt-4 pb-2 flex flex-col gap-2">
+            <header class="flex items-center justify-between gap-2">
+              <h3 class="text-xl font-semibold text-[#111517]">پوستر نمایشگاه مینیمال</h3>
+              <span class="font-mono text-xs text-[#1558B0]" dir="ltr">A2</span>
+            </header>
+            <p class="text-[15px] leading-6 text-[#4A545C]">ترکیب‌بندی خلوت، عکاسی هنری و چیدمان دقیق برای گالری‌ها و رویدادهای فرهنگی.</p>
+          </div>
+        </div>
+        <footer class="px-3 pb-3 pt-3 flex items-center justify-between gap-3">
+          <span class="text-base font-semibold text-[#111517] tabular-nums">۴۹۰,۰۰۰ تومان</span>
+          <a href="tel:+989365051900" onclick="copyPhoneNumber('پوستر نمایشگاه مینیمال')" class="inline-flex items-center gap-1.5 rounded-full liquid-glass-dark text-white px-4 py-2 transition-transform hover:scale-105">
+            <span class="material-symbols-outlined text-sm" aria-hidden="true">call</span>
+            <span class="text-sm font-semibold">تماس برای سفارش</span>
+          </a>
+        </footer>
+      </article>
+
+      <article data-category="تبلیغاتی و برند" style="animation-delay: 350ms;" class="poster-card card-stagger h-full rounded-[34px] liquid-glass-card p-2.5 flex flex-col justify-between">
+        <div>
+          <div class="overflow-hidden rounded-[24px]">
+            <img src="https://lh3.googleusercontent.com/aida/ALJJyrBi91AKlBFnBIhVRU15k7Ir_1uK0Y9CKgIvGOsNiFCt0AqGsXpqezY1YUqwAB44mj8wyfFUfK_X2Y9TyEbfM2SGeA-aIKgBNOKpFqwdRvXwEqBj0rbOK2-IKjMgaFOxxkA0NyQBTyXh09G54LT5VIunx6GBjjH8_TrbWBQ6Ef9jgK9q11TGO0vIaJC_KHrwry2APhb2rz-QUagNOsmDW5IHTfF6oyuB4FosJfxQlxEGbtKAPF72LJIzAs0YtV8i" alt="پوستر معرفی محصول مدرن" referrerPolicy="no-referrer" class="w-full h-80 sm:h-96 object-cover rounded-[24px]" />
+          </div>
+          <div class="px-3 pt-4 pb-2 flex flex-col gap-2">
+            <header class="flex items-center justify-between gap-2">
+              <h3 class="text-xl font-semibold text-[#111517]">پوستر رونمایی محصول</h3>
+              <span class="font-mono text-xs text-[#1558B0]" dir="ltr">1080×1350</span>
+            </header>
+            <p class="text-[15px] leading-6 text-[#4A545C]">طراحی سه‌بعدی و نورپردازی استودیویی برای کمپین‌های دیجیتال و بیلبورد.</p>
+          </div>
+        </div>
+        <footer class="px-3 pb-3 pt-3 flex items-center justify-between gap-3">
+          <span class="text-base font-semibold text-[#111517] tabular-nums">۷۸۰,۰۰۰ تومان</span>
+          <a href="tel:+989365051900" onclick="copyPhoneNumber('پوستر رونمایی محصول')" class="inline-flex items-center gap-1.5 rounded-full liquid-glass-dark text-white px-4 py-2 transition-transform hover:scale-105">
+            <span class="material-symbols-outlined text-sm" aria-hidden="true">call</span>
+            <span class="text-sm font-semibold">تماس برای سفارش</span>
+          </a>
+        </footer>
+      </article>
+
+      <article data-category="سینمایی" style="animation-delay: 420ms;" class="poster-card card-stagger h-full rounded-[34px] liquid-glass-card p-2.5 flex flex-col justify-between">
+        <div>
+          <div class="overflow-hidden rounded-[24px]">
+            <img src="https://lh3.googleusercontent.com/aida/ALJJyrCT_Id-aQ2MmffSVQyXXJYI48jIoTt_yCTtDttndktGBgNloj2gliWKu4TomzyG1rvNbj6rUjbwYe0Rpyl5yi83zPzb3KFxX-I5lGOjCzcieYa71-vEjJaSnHEGcRFela1ern-fY_B57zkBgT5Hq6ajb2ZpXhfJGYkFNn-Rb0qfuJ6H2l8vv4nfnEgu70Pv7H8rL1VOZ1f0F4-5hhT9BmpwGZxlpYmkZcVEkz-i6Z0sTtuuWrzKHZCwv44Img" alt="پوستر فیلم کوتاه و تئاتر" referrerPolicy="no-referrer" class="w-full h-80 sm:h-96 object-cover rounded-[24px]" />
+          </div>
+          <div class="px-3 pt-4 pb-2 flex flex-col gap-2">
+            <header class="flex items-center justify-between gap-2">
+              <h3 class="text-xl font-semibold text-[#111517]">پوستر فیلم کوتاه و تئاتر</h3>
+              <span class="font-mono text-xs text-[#1558B0]" dir="ltr">70×100 cm</span>
+            </header>
+            <p class="text-[15px] leading-6 text-[#4A545C]">فضاسازی اتمسفریک و روایت‌گر همراه با کردیت‌بندی استاندارد جشنواره‌ها.</p>
+          </div>
+        </div>
+        <footer class="px-3 pb-3 pt-3 flex items-center justify-between gap-3">
+          <span class="text-base font-semibold text-[#111517] tabular-nums">۸۹۰,۰۰۰ تومان</span>
+          <a href="tel:+989365051900" onclick="copyPhoneNumber('پوستر فیلم کوتاه و تئاتر')" class="inline-flex items-center gap-1.5 rounded-full liquid-glass-dark text-white px-4 py-2 transition-transform hover:scale-105">
+            <span class="material-symbols-outlined text-sm" aria-hidden="true">call</span>
+            <span class="text-sm font-semibold">تماس برای سفارش</span>
+          </a>
+        </footer>
+      </article>
+
+      <article data-category="هنری و مینیمال" style="animation-delay: 490ms;" class="poster-card card-stagger h-full rounded-[34px] liquid-glass-card p-2.5 flex flex-col justify-between">
+        <div>
+          <div class="overflow-hidden rounded-[24px]">
+            <img src="https://lh3.googleusercontent.com/aida/ALJJyrDAjq4foE9Blw9wXFLGZPjNthnWD9Zp-tXV5ncOmgDJv2wGIqin7XTAvmoLfhR1vKz7ExCFRyxUxz3qlLSKCFVBxy_vEnMnwQzGiaivbknv3Sn3Xdx3HuH9Cp97X-dlPQoL00A7DqVXG9pl2V1VrtTh5HKqgeM_1AYo4qsnmPm9J5Pdz3PwNRisj9XQ-kFnQF3stqL9txynl2TznihLX0KM8rK_2nU9__4fgDXPyaW4vUUN_QeGru1J_I7L2g" alt="پوستر گرافیک سوئیسی و باهاوس" referrerPolicy="no-referrer" class="w-full h-80 sm:h-96 object-cover rounded-[24px]" />
+          </div>
+          <div class="px-3 pt-4 pb-2 flex flex-col gap-2">
+            <header class="flex items-center justify-between gap-2">
+              <h3 class="text-xl font-semibold text-[#111517]">پوستر هندسی باهاوس</h3>
+              <span class="font-mono text-xs text-[#1558B0]" dir="ltr">A3</span>
+            </header>
+            <p class="text-[15px] leading-6 text-[#4A545C]">گریدبندی دقیق و فرم‌های معماری مناسب استودیوها، کتاب‌فروشی‌ها و دکوراسیون.</p>
+          </div>
+        </div>
+        <footer class="px-3 pb-3 pt-3 flex items-center justify-between gap-3">
+          <span class="text-base font-semibold text-[#111517] tabular-nums">۳۹۰,۰۰۰ تومان</span>
+          <a href="tel:+989365051900" onclick="copyPhoneNumber('پوستر هندسی باهاوس')" class="inline-flex items-center gap-1.5 rounded-full liquid-glass-dark text-white px-4 py-2 transition-transform hover:scale-105">
+            <span class="material-symbols-outlined text-sm" aria-hidden="true">call</span>
+            <span class="text-sm font-semibold">تماس برای سفارش</span>
+          </a>
+        </footer>
+      </article>
+
+      <article data-category="رویداد و فستیوال" style="animation-delay: 560ms;" class="poster-card card-stagger h-full rounded-[34px] liquid-glass-card p-2.5 flex flex-col justify-between">
+        <div>
+          <div class="overflow-hidden rounded-[24px]">
+            <img src="https://lh3.googleusercontent.com/aida/ALJJyrCpC5rukL1qtSMldPejhYgAc8kdg4AJidznDh1PXsmAEc4Ly2BJU2oBE0YFEBweSoyXEZNLNj1HO9O0IlTrp3yVgUIOTl-1aP1H-MoU0O7BG2QVgsToLhdL-A3gX6YpFcFHPgW_NXBQ7jJnWjUKaKIMIcx1t69yFBOtWbDCvXX_9378UJhbjSn484DvFu6BfeUJ9VTDVi4zaM9uPovWQFGV9LWW3m_RNJU8yHRz7X9caAOOYZTrRMgaIw" alt="پوستر همایش فناوری و استارتاپ" referrerPolicy="no-referrer" class="w-full h-80 sm:h-96 object-cover rounded-[24px]" />
+          </div>
+          <div class="px-3 pt-4 pb-2 flex flex-col gap-2">
+            <header class="flex items-center justify-between gap-2">
+              <h3 class="text-xl font-semibold text-[#111517]">پوستر رویداد تکنولوژی</h3>
+              <span class="font-mono text-xs text-[#1558B0]" dir="ltr">A2</span>
+            </header>
+            <p class="text-[15px] leading-6 text-[#4A545C]">الهام‌گرفته از رابط‌های مدرن و شبکه‌های تعاملی برای هکاتون‌ها و کنفرانس‌ها.</p>
+          </div>
+        </div>
+        <footer class="px-3 pb-3 pt-3 flex items-center justify-between gap-3">
+          <span class="text-base font-semibold text-[#111517] tabular-nums">۶۵۰,۰۰۰ تومان</span>
+          <a href="tel:+989365051900" onclick="copyPhoneNumber('پوستر رویداد تکنولوژی')" class="inline-flex items-center gap-1.5 rounded-full liquid-glass-dark text-white px-4 py-2 transition-transform hover:scale-105">
+            <span class="material-symbols-outlined text-sm" aria-hidden="true">call</span>
+            <span class="text-sm font-semibold">تماس برای سفارش</span>
+          </a>
+        </footer>
+      </article>
+    </div>
+  </main>
+
+  <section id="pricing" class="w-full max-w-6xl mx-auto px-6 py-20 flex flex-col gap-10">
+    <div class="flex flex-col gap-2">
+      <h2 class="text-3xl md:text-4xl font-bold text-[#111517]">تعرفه‌های اقتصادی و خرید ارزان پوستر</h2>
+      <p class="text-[15px] text-[#4A545C] max-w-2xl">سفارش مستقیم به طراح بدون هزینه واسطه؛ شروع قیمت از ۳۹۰,۰۰۰ تومان همراه با تخفیف پکیجی.</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-7 items-stretch">
+      
+      <article class="rounded-[34px] liquid-glass-card p-6 md:p-7 flex flex-col justify-between gap-6 ">
+        <div class="flex flex-col gap-4">
+          <div class="flex flex-col gap-1.5">
+            <span class="text-xs text-[#4A545C]">تحویل ۲۴ تا ۴۸ ساعته</span>
+            <h3 class="text-xl font-semibold text-[#111517]">پکیج اقتصادی و دانشجویی</h3>
+            <p class="text-[15px] text-[#4A545C]">مناسب اطلاعیه‌ها، نمایشگاه‌های کوچک، پوستر فارسی ساده و شبکه‌های اجتماعی</p>
+          </div>
+          <div class="border-t border-[#DCE0E5]/60 pt-4">
+            <span class="text-2xl font-semibold text-[#111517] tabular-nums">۳۹۰,۰۰۰ تومان</span>
+          </div>
+          <ul class="flex flex-col gap-2.5 pt-1 text-[15px] text-[#4A545C]">
+            <li>✓ طراحی یک پوستر فارسی یا دوزبانه در سایز A3 یا اینستاگرام</li><li>✓ انتخاب فونت فارسی استاندارد و رنگ‌بندی هماهنگ</li><li>✓ خروجی PDF آماده چاپ + فایل PNG با کیفیت بالا</li><li>✓ ۲ نوبت اصلاح رایگان جزئیات و متن</li>
+          </ul>
+        </div>
+        <a href="tel:+989365051900" onclick="copyPhoneNumber('پکیج اقتصادی و دانشجویی')" class="w-full inline-flex items-center justify-center gap-2 rounded-full py-3.5 px-6 liquid-glass-chip text-[#111517]">
+          <span class="material-symbols-outlined text-base" aria-hidden="true">call</span>
+          <span class="text-sm font-semibold">سفارش تلفنی این پکیج</span>
+        </a>
+      </article>
+
+      <article class="rounded-[34px] liquid-glass-card p-6 md:p-7 flex flex-col justify-between gap-6 ring-2 ring-[#1558B0]/35">
+        <div class="flex flex-col gap-4">
+          <div class="flex flex-col gap-1.5">
+            <span class="text-xs text-[#4A545C]">تحویل ۴۸ ساعته</span>
+            <h3 class="text-xl font-semibold text-[#111517]">پکیج پرطرفدار چاپ و دیجیتال</h3>
+            <p class="text-[15px] text-[#4A545C]">انتخاب اول کنسرت‌ها، گالری‌ها، تئاتر و ایونت‌های فرهنگی با بهترین نسبت قیمت</p>
+          </div>
+          <div class="border-t border-[#DCE0E5]/60 pt-4">
+            <span class="text-2xl font-semibold text-[#111517] tabular-nums">۶۵۰,۰۰۰ تومان</span>
+          </div>
+          <ul class="flex flex-col gap-2.5 pt-1 text-[15px] text-[#4A545C]">
+            <li>✓ طراحی اختصاصی در قطع بزرگ 50×70 یا A2 با کیفیت 300 DPI</li><li>✓ تایپوگرافی خلاقانه فارسی + نسخه استوری و پست اینستاگرام</li><li>✓ فایل لایه‌باز (PSD یا AI) + خروجی CMYK آماده چاپخانه</li><li>✓ ۳ نوبت اصلاح رایگان + مشاوره انتخاب کاغذ چاپ</li>
+          </ul>
+        </div>
+        <a href="tel:+989365051900" onclick="copyPhoneNumber('پکیج پرطرفدار چاپ و دیجیتال')" class="w-full inline-flex items-center justify-center gap-2 rounded-full py-3.5 px-6 liquid-glass-dark text-white">
+          <span class="material-symbols-outlined text-base" aria-hidden="true">call</span>
+          <span class="text-sm font-semibold">سفارش تلفنی این پکیج</span>
+        </a>
+      </article>
+
+      <article class="rounded-[34px] liquid-glass-card p-6 md:p-7 flex flex-col justify-between gap-6 ">
+        <div class="flex flex-col gap-4">
+          <div class="flex flex-col gap-1.5">
+            <span class="text-xs text-[#4A545C]">تحویل ۳ تا ۴ روز کاری</span>
+            <h3 class="text-xl font-semibold text-[#111517]">پکیج جامع برند و جشنواره</h3>
+            <p class="text-[15px] text-[#4A545C]">مناسب کمپین‌های تبلیغاتی، رونمایی محصول و پوسترهای سینمایی حرفه‌ای</p>
+          </div>
+          <div class="border-t border-[#DCE0E5]/60 pt-4">
+            <span class="text-2xl font-semibold text-[#111517] tabular-nums">۹۸۰,۰۰۰ تومان</span>
+          </div>
+          <ul class="flex flex-col gap-2.5 pt-1 text-[15px] text-[#4A545C]">
+            <li>✓ ۲ اتود اولیه متفاوت با تصویرسازی یا رندر اختصاصی</li><li>✓ تحویل هم‌زمان قطع 70×100، بنر سایت و کیت کامل شبکه‌های اجتماعی</li><li>✓ تایپوگرافی سفارشی فارسی و لاتین + کردیت‌بلاک استاندارد</li><li>✓ اصلاح نامحدود تا تایید نهایی + پشتیبانی چاپخانه</li>
+          </ul>
+        </div>
+        <a href="tel:+989365051900" onclick="copyPhoneNumber('پکیج جامع برند و جشنواره')" class="w-full inline-flex items-center justify-center gap-2 rounded-full py-3.5 px-6 liquid-glass-chip text-[#111517]">
+          <span class="material-symbols-outlined text-base" aria-hidden="true">call</span>
+          <span class="text-sm font-semibold">سفارش تلفنی این پکیج</span>
+        </a>
+      </article>
+    </div>
+  </section>
+
+  <section id="process" class="w-full max-w-6xl mx-auto px-6 py-16 flex flex-col gap-8">
+    <h2 class="text-3xl font-bold text-[#111517]">فرآیند طراحی در <span dir="ltr">Zoomino</span></h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      
+      <div class="rounded-[30px] liquid-glass-card p-6 flex flex-col gap-3">
+        <span class="font-mono text-2xl font-bold text-[#1558B0] tabular-nums">۰۱.</span>
+        <h3 class="text-xl font-semibold text-[#111517]">تماس کوتاه و ثبت ایده</h3>
+        <p class="text-[15px] text-[#4A545C]">بدون فرم‌های طولانی فقط با شماره استودیو تماس بگیرید؛ موضوع پوستر، ابعاد و بودجه خود را در ۳ دقیقه بگویید.</p>
+      </div>
+
+      <div class="rounded-[30px] liquid-glass-card p-6 flex flex-col gap-3">
+        <span class="font-mono text-2xl font-bold text-[#1558B0] tabular-nums">۰۲.</span>
+        <h3 class="text-xl font-semibold text-[#111517]">طراحی و تایپوگرافی فارسی</h3>
+        <p class="text-[15px] text-[#4A545C]">طراحان Zoomino بر اساس هویت رویداد یا برند شما، ترکیب‌بندی بصری و تایپوگرافی اصیل فارسی را اجرا می‌کنند.</p>
+      </div>
+
+      <div class="rounded-[30px] liquid-glass-card p-6 flex flex-col gap-3">
+        <span class="font-mono text-2xl font-bold text-[#1558B0] tabular-nums">۰۳.</span>
+        <h3 class="text-xl font-semibold text-[#111517]">بازبینی رایگان و تحویل فایل</h3>
+        <p class="text-[15px] text-[#4A545C]">پیش‌نمایش برای شما ارسال می‌شود و پس از اعمال اصلاحات رایگان، فایل نهایی آماده چاپ و دیجیتال را تحویل می‌گیرید.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="w-full max-w-4xl mx-auto px-6 py-16 flex flex-col gap-6">
+    <h2 class="text-3xl font-bold text-[#111517] text-center">سوالات متداول</h2>
+    <div class="flex flex-col gap-3.5">
+      
+      <details class="rounded-[26px] liquid-glass-card p-6">
+        <summary class="cursor-pointer font-semibold text-base text-[#111517]">چرا قیمت طراحی پوستر در Zoomino نسبت به آژانس‌ها ارزان‌تر است؟</summary>
+        <p class="pt-3 text-[15px] text-[#4A545C]">در Zoomino مستقیماً با طراح اصلی در ارتباط هستید و هزینه‌های اضافه واسطه‌گری یا پکیج‌های اجباری حذف شده است؛ به همین دلیل می‌توانید از ۳۹۰,۰۰۰ تومان سفارش اقتصادی ثبت کنید.</p>
+      </details>
+
+      <details class="rounded-[26px] liquid-glass-card p-6">
+        <summary class="cursor-pointer font-semibold text-base text-[#111517]">آیا امکان طراحی پوستر تمام‌فارسی با خط خوشنویسی یا فونت مدرن وجود دارد؟</summary>
+        <p class="pt-3 text-[15px] text-[#4A545C]">بله؛ تخصص اصلی استودیو طراحی پوستر فارسی با بهره‌گیری از فونت‌های قانونی معاصر، تایپوگرافی هندسی و خطاطی مدرن برای نمایشگاه‌ها، کتاب، تئاتر و برندهای ایرانی است.</p>
+      </details>
+
+      <details class="rounded-[26px] liquid-glass-card p-6">
+        <summary class="cursor-pointer font-semibold text-base text-[#111517]">فایل‌های نهایی در چه فرمت‌هایی و برای چه نوع چاپی تحویل داده می‌شوند؟</summary>
+        <p class="pt-3 text-[15px] text-[#4A545C]">خروجی‌های چاپی با رزولوشن 300 DPI و پروفایل رنگی CMYK به‌صورت PDF/TIFF استاندارد چاپخانه و نسخه‌های دیجیتال به‌صورت JPG/PNG آماده انتشار در اینستاگرام و وب ارسال می‌شوند.</p>
+      </details>
+
+      <details class="rounded-[26px] liquid-glass-card p-6">
+        <summary class="cursor-pointer font-semibold text-base text-[#111517]">آیا برای سفارش چند پوستر هم‌زمان یا سفارش‌های دانشجویی تخفیف دارید؟</summary>
+        <p class="pt-3 text-[15px] text-[#4A545C]">بله؛ سفارش‌های ۳ پوستر به بالا شامل ۲۰٪ تخفیف پکیجی می‌شوند و برای انجمن‌های علمی، دانشجویی و گروه‌های تئاتر مستقل همیشه تعرفه اقتصادی در نظر گرفته می‌شود.</p>
+      </details>
+
+      <details class="rounded-[26px] liquid-glass-card p-6">
+        <summary class="cursor-pointer font-semibold text-base text-[#111517]">اگر پوستر را فوری برای فردا بخواهم امکان تحویل سریع هست؟</summary>
+        <p class="pt-3 text-[15px] text-[#4A545C]">بله؛ برای رویدادهای فوری، گزینه تحویل اکسپرس زیر ۲۴ ساعت فعال است که هنگام تماس تلفنی می‌توانید زمان دقیق تحویل را هماهنگ کنید.</p>
+      </details>
+    </div>
+  </section>
+
+  <section id="contact" class="w-full max-w-6xl mx-auto px-6 pb-20">
+    <div class="rounded-[34px] liquid-glass-card p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+      <div class="flex flex-col gap-2 max-w-xl">
+        <h2 class="text-2xl font-semibold text-[#111517]">سفارش سریع بدون فرم — مستقیم تماس بگیرید</h2>
+        <p class="text-[15px] text-[#4A545C]">همه‌روزه از ساعت ۹ تا ۲۱ پاسخگوی شما هستیم: <span class="font-mono text-[#1558B0]" dir="ltr">0936-505-1900</span></p>
+      </div>
+      <div class="flex flex-wrap items-center gap-3 shrink-0">
+        <button type="button" onclick="copyPhoneNumber()" class="inline-flex items-center gap-2 rounded-full liquid-glass-chip px-6 py-3.5 text-sm font-semibold">
+          <span class="material-symbols-outlined text-base" aria-hidden="true">content_copy</span>
+          <span>کپی شماره</span>
+        </button>
+        <a href="tel:+989365051900" onclick="copyPhoneNumber()" class="inline-flex items-center gap-2 rounded-full liquid-glass-dark text-white px-8 py-3.5 text-sm font-semibold font-mono" dir="ltr">
+          <span class="material-symbols-outlined text-base" aria-hidden="true">call</span>
+          <span>0936 505 1900</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="register-form" class="w-full max-w-6xl mx-auto px-6 pb-20 flex flex-col gap-6">
+    <div class="flex flex-col gap-2">
+      <h2 class="text-3xl font-bold text-[#111517]">فرم ثبت‌نام و ثبت سفارش آنلاین</h2>
+      <p class="text-[15px] text-[#4A545C]">مشخصات و توضیحات پوستر مورد نظر خود را در فرم زیر ثبت کنید.</p>
+    </div>
+    <div class="rounded-[34px] liquid-glass-card p-4 md:p-6 overflow-hidden">
+      <div id="whzvQlOi" style="min-height: 480px; position: relative;">
+        <div id="porsline-loading-whzvQlOi" style="position: absolute; top: 50%; left: 50%; width: 35px; height: 35px; border: 4px solid rgba(0, 0, 0, 0.1); border-top: 4px solid #555; border-radius: 50%; animation: spin-whzvQlOi 1s linear infinite;"></div>
+        <script>
+          const styleSheet = document.createElement('style');
+          styleSheet.innerHTML = `@keyframes spin-whzvQlOi {
+              0% { transform: rotate(0deg); }
+              100% { transform: rotate(360deg); }
+            }`;
+          document.head.appendChild(styleSheet);
+          const loadingIndicator = document.getElementById('porsline-loading-whzvQlOi');
+          const script = document.createElement('script');
+          script.type = 'text/javascript';
+          script.fetchPriority = 'high';
+          script.onload = function() {
+            loadingIndicator.style.display = 'none';
+          };
+          script.src = 'https://survey.porsline.ir/embed/eyJ3aWR0aCI6IjEwMCUiLCJoZWlnaHQiOiIxMDAlIiwiYm9yZGVyIjoibm9uZSJ9/whzvQlOi';
+          document.getElementById('whzvQlOi').appendChild(script);
+        </script>
+      </div>
+    </div>
+  </section>
+
+  <footer class="mt-auto liquid-glass border-x-0 border-b-0 px-8 py-6">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#4A545C]">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-base text-[#1558B0]" aria-hidden="true">science</span>
+        <span><strong dir="ltr">Zoomino</strong> — استودیو طراحی گرافیک و پوستر</span>
+      </div>
+      <a href="tel:+989365051900" class="font-mono" dir="ltr">0936 505 1900</a>
+    </div>
+  </footer>
+
+  <div id="phone-toast" role="status" aria-live="polite" class="pointer-events-none fixed bottom-6 left-1/2 -translate-x-1/2 z-50 opacity-0 translate-y-3 transition-all rounded-full liquid-glass-dark text-white px-6 py-3 flex items-center gap-2">
+    <span class="material-symbols-outlined text-base" aria-hidden="true">check_circle</span>
+    <span id="toast-text" class="text-sm font-semibold"></span>
+  </div>
+
+  <script>
+    const slides = [{"title":"استودیو طراحی پوستر و تایپوگرافی فارسی","subtitle":"ایده‌های رویداد، برند یا نمایشگاه خود را با تعرفه اقتصادی و استاندارد چاپ به پوسترهای فارسی و مدرن تبدیل کنید."},{"title":"پوسترهای فارسی با خوشنویسی معاصر","subtitle":"ترکیب تایپوگرافی اختصاصی فارسی و گریدبندی مدرن برای نمایشگاه‌ها، تئاتر و رویدادهای فرهنگی."},{"title":"خرید ارزان و مستقیم بدون واسطه","subtitle":"سفارش مستقیم تلفنی با قیمت اقتصادی استارتاپی، بدون هزینه آژانس و همراه با فایل آماده چاپ."},{"title":"پوسترهای رویداد، موسیقی و برند","subtitle":"طراحی اختصاصی برای رونمایی محصولات، همایش‌ها و کمپین‌های اینستاگرام و بیلبورد."}];
+    let currentSlide = 0;
+    function renderSlide() {
+      document.getElementById('hero-title').textContent = slides[currentSlide].title;
+      document.getElementById('hero-subtitle').textContent = slides[currentSlide].subtitle;
+      document.querySelectorAll('.slide-dot').forEach((dot, idx) => {
+        dot.classList.toggle('w-8', idx === currentSlide);
+        dot.classList.toggle('bg-[#111517]', idx === currentSlide);
+        dot.classList.toggle('w-2', idx !== currentSlide);
+        dot.classList.toggle('bg-[#5F6368]/60', idx !== currentSlide);
+      });
+    }
+    function nextSlide() { currentSlide = (currentSlide + 1) % slides.length; renderSlide(); }
+    function prevSlide() { currentSlide = (currentSlide - 1 + slides.length) % slides.length; renderSlide(); }
+    function goToSlide(i) { currentSlide = i; renderSlide(); }
+    function filterGallery(category, btn) {
+      document.querySelectorAll('.filter-chip').forEach((chip) => {
+        chip.setAttribute('aria-pressed', 'false');
+        chip.className = 'filter-chip shrink-0 inline-flex items-center rounded-full px-4 py-2 transition-transform hover:scale-105 liquid-glass-chip text-[#4A545C] hover:text-[#111517]';
+      });
+      btn.setAttribute('aria-pressed', 'true');
+      btn.className = 'filter-chip shrink-0 inline-flex items-center rounded-full px-4 py-2 transition-transform hover:scale-105 liquid-glass-dark text-white';
+      document.querySelectorAll('.poster-card').forEach((card) => {
+        card.classList.toggle('hidden', category !== 'همه سبک‌ها' && card.dataset.category !== category);
+      });
+    }
+    let toastTimer;
+    function copyPhoneNumber(styleName) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText('09365051900').catch(function(){});
+      }
+      var toast = document.getElementById('phone-toast');
+      document.getElementById('toast-text').textContent = styleName ? ('شماره ۰۹۳۶۵۰۵۱۹۰۰ برای سفارش «' + styleName + '» کپی شد') : 'شماره تماس ۰۹۳۶۵۰۵۱۹۰۰ کپی شد';
+      toast.classList.remove('opacity-0', 'translate-y-3');
+      toast.classList.add('opacity-100', 'translate-y-0');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(function() {
+        toast.classList.add('opacity-0', 'translate-y-3');
+        toast.classList.remove('opacity-100', 'translate-y-0');
+      }, 2600);
+    }
+  </script>
+</body>
+</html>
